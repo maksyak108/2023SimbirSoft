@@ -1,3 +1,5 @@
+![RPReplay_Final1688076124](https://github.com/maksyak108/2023SimbirSoft/assets/112902969/594acfc4-b9a3-42b0-a1f8-6dacfc6dd9d5)
+![RPReplay_Final1688076052](https://github.com/maksyak108/2023SimbirSoft/assets/112902969/23516239-e8a8-485e-a699-20145aa4c15b)
 # 2023SimbirSoft
 Необходимо написать мобильное приложение, представляющее из себя ежедневник
 # MainViewController
