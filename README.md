@@ -1,5 +1,3 @@
-![Запись экрана 2023-06-30 в 00 53 17](https://github.com/maksyak108/2023SimbirSoft/assets/112902969/e9517cbc-6984-4df5-bbc1-b94e139b3261)
-
 # 2023SimbirSoft
 Необходимо написать мобильное приложение, представляющее из себя ежедневник
 # MainViewController
