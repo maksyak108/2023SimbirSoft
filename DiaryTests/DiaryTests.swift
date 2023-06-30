@@ -9,28 +9,53 @@ import XCTest
 @testable import Diary
 
 final class DiaryTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var viewController: MainViewController!
+    var mockPresenter: MockMainPresenter!
+    
+    override func setUp() {
+        super.setUp()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        viewController = storyboard.instantiateViewController(withIdentifier: "Main") as? MainViewController
+        mockPresenter = MockMainPresenter()
+        viewController.presenter = mockPresenter
+        viewController.loadViewIfNeeded()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        viewController = nil
+        mockPresenter = nil
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testTableViewNumberOfRows() {
+        let numberOfRows = viewController.tableView(viewController.tableView, numberOfRowsInSection: 0)
+        XCTAssertEqual(numberOfRows, mockPresenter.data.count)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testRemoveItem() {
+        let mockItem = DataItem()
+        mockPresenter.mockData.append(mockItem)
+        mockPresenter.removeItem(item: mockItem)
+        XCTAssertFalse(mockPresenter.mockData.contains(mockItem))
     }
-
+        
 }
+
+class MockMainPresenter: MainPresenter {
+    
+    var mockData: [DataItem] = []
+        
+    override func loadData() {
+        data = []
+        view?.refresh()
+    }
+    
+    override func removeItem(item: DataItem) {
+        mockData.removeAll(where: { $0 === item })
+        view?.refresh()
+    }
+    
+    
+}
+
